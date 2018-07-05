@@ -5,32 +5,30 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = { userName: '' };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(`Event: Form Submit', ${this.state.userName}`);
-    // axios.get()
+    axios.get(`https://api.github.com/users/${this.state.userName}`)
+      .then(resp => {
+        this.props.onSubmit(resp.data);
+        this.setState({userName: ''});
+    }).catch(error => {
+        throw(error);
+    });
   }
-
-  handleChange(value) {
-    this.setState({
-      userName: value
-    })
-  }
-
-
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <input type="text"
                value={this.state.userName}
-               onChange={(event) => this.handleChange(event.target.value)}
+               onChange={(event) => this.setState({userName: event.target.value})}
                placeholder="Github username, eg. jhyapril"
                style={{width: '10rem'}}
                required/>
-        <button type="submit" onClick={(event) => this.handleSubmit(event)}>Add card</button>
+        <button type="submit">Add card</button>
       </form>
     );
   }
@@ -38,8 +36,8 @@ class Form extends React.Component {
 
 
 
-// Form.propTypes = {
-//
-// };
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
 
 export default Form;

@@ -8,13 +8,20 @@ class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = { cards: Data };
+    this.addNewCard = this.addNewCard.bind(this);
   }
 
+  addNewCard(cardInfo) {
+    this.setState((prevState) => ({
+      cards: prevState.cards.concat(cardInfo)
+    }));
+  }
 
   render() {
     return(
       <div>
-        <Form />
+        <h1> Use this tool to get Github user info </h1>
+        <Form onSubmit={this.addNewCard}/>
         <CardList cards={this.state.cards}/>
       </div>
     );

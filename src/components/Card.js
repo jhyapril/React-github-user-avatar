@@ -9,6 +9,7 @@ const Card = (props) => {
           {props.name}
         </div>
         <div>{props.company}</div>
+        <div>Joined at: {props.created_at.substring(0, 10)}</div>
       </div>
     </div>
   );
@@ -17,7 +18,8 @@ const Card = (props) => {
 Card.propTypes = {
   avatar_url: PropTypes.string,
   name: PropTypes.string,
-  company: PropTypes.string
+  company: PropTypes.string,
+  created_at: PropTypes.string
 };
 
 export default Card;
