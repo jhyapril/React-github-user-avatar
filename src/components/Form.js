@@ -28,7 +28,7 @@ class Form extends React.Component {
                placeholder="Github username, eg. jhyapril"
                style={{width: '10rem'}}
                required/>
-        <button type="submit">Add card</button>
+        <button type="submit">Search</button>
       </form>
     );
   }
