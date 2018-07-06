@@ -15,6 +15,8 @@ class Form extends React.Component {
         this.props.onSubmit(resp.data);
         this.setState({userName: ''});
     }).catch(error => {
+        alert(`Username '${this.state.userName}' is not found.`);
+        this.setState({userName: ''});
         throw(error);
     });
   }
